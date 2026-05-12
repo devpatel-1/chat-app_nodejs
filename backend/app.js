@@ -1,8 +1,8 @@
-
 const express = require('express')
+
 const cors = require('cors')
 
-const notes = require('./notes')
+const Note = require('./note')
 
 const app = express()
 
@@ -13,21 +13,24 @@ app.use(cors())
 app.use(express.json())
 
 // Get Notes
-app.get('/notes', (req, res) => {
+app.get('/notes', async (req, res) => {
 
-    const allNotes = notes.loadNotes()
+    const notes = await Note.find()
 
-    res.send(allNotes)
+    res.send(notes)
 })
 
 // Add Note
-app.post('/notes', (req, res) => {
+app.post('/notes', async (req, res) => {
 
-    const title = req.body.title
+    const note = new Note({
 
-    const body = req.body.body
+        title: req.body.title,
 
-    notes.addNote(title, body)
+        body: req.body.body
+    })
+
+    await note.save()
 
     res.send({
         success: true
@@ -35,11 +38,13 @@ app.post('/notes', (req, res) => {
 })
 
 // Delete Note
-app.delete('/notes/:title', (req, res) => {
+app.delete('/notes/:title', async (req, res) => {
 
     const title = decodeURIComponent(req.params.title)
 
-    notes.removeNote(title)
+    await Note.findOneAndDelete({
+        title: title
+    })
 
     res.send({
         success: true
