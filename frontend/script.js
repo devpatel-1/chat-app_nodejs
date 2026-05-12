@@ -54,9 +54,16 @@ const loadNotes = () => {
 // Add Note
 const addNote = () => {
 
-    const title = document.getElementById('title').value
+    const title = document.getElementById('title').value.trim()
 
-    const body = document.getElementById('body').value
+    const body = document.getElementById('body').value.trim()
+
+    if (title === '' || body === '') {
+
+        alert('Please fill all fields')
+
+        return
+    }
 
     fetch('https://chat-app-nodejs-ag2d.onrender.com/notes', {
 
