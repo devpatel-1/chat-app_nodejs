@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "main": "app.js",
     "license": "ISC",
+    "engines": {
+        "node": "20.x"
+    },
     "dependencies": {
         "chalk": "^4.1.2",
         "cors": "^2.8.6",
@@ -18,3 +21,4 @@
     "author": "",
     "type": "commonjs"
 }
+
