@@ -3,7 +3,7 @@ const notesDiv = document.getElementById('notes')
 // Load Notes
 const loadNotes = () => {
 
-    fetch('/notes')
+    fetch('https://chat-app-nodejs-ag2d.onrender.com/notes')
     .then((response) => {
         return response.json()
     })
@@ -58,7 +58,7 @@ const addNote = () => {
 
     const body = document.getElementById('body').value
 
-    fetch('/notes', {
+    fetch('https://chat-app-nodejs-ag2d.onrender.com/notes', {
 
         method: 'POST',
 
@@ -84,8 +84,7 @@ const addNote = () => {
 // Delete Note
 const deleteNote = (title) => {
 
-    fetch('/notes/' + encodeURIComponent(title), {
-
+    fetch('https://chat-app-nodejs-ag2d.onrender.com/notes/' + encodeURIComponent(title), {
         method: 'DELETE'
     })
     .then(() => {
